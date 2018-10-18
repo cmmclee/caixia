@@ -18,6 +18,6 @@ public class HelloController {
 
     @RequestMapping("/")
     public String sayHello() {
-        return "Hello, "+ caiXiaConfig.getName()+ "!";
+        return "Hello, "+ caiXiaConfig.getName()+ "_" + caiXiaConfig.getBrithday();
     }
 }
