@@ -3,15 +3,16 @@ package com.caixia.controller;
 import com.caixia.entity.User;
 import com.caixia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @auther: LiChaoChao
  * @date: 2018-10-19
  */
 @RequestMapping("/user")
-@RestController
+@Controller
 public class UserController {
 
     @Autowired
@@ -24,9 +25,10 @@ public class UserController {
     }
 
     @RequestMapping("/get")
-    public String getUser(String name) {
+    public String getUser(String name, Model model) {
         User user = userService.findByName(name);
-        return "Hello, "+ user.getName()+ "_" + user.getAge();
+        model.addAttribute("user", user);
+        return "user/userList";
     }
 
 }
