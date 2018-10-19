@@ -2,3 +2,16 @@ caixia:
   config:
     name: caixia
     birthday: 19911029
+
+## 数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/caixia?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+## Mybatis 配置
+mybatis:
+  type-aliases-package: com.caixia.entity
+  mapper-locations: classpath:mapper/*.xml

@@ -20,4 +20,6 @@ public class HelloController {
     public String sayHello() {
         return "Hello, "+ caiXiaConfig.getName()+ "_" + caiXiaConfig.getBrithday();
     }
+
+
 }
