@@ -1,11 +1,15 @@
 package com.caixia.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.io.Serializable;
+
 /**
  * @auther: LiChaoChao
  * @date: 2018-10-19
  */
-
-public class User {
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+public class User implements Serializable{
 
     private int id;
 

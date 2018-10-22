@@ -1,7 +1,10 @@
 package com.caixia.controller;
 
+import com.caixia.cache.UserCache;
 import com.caixia.entity.User;
 import com.caixia.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
 
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserCache userCache;
 
     @RequestMapping("/save")
     public String saveUser(User user) {
@@ -26,7 +33,12 @@ public class UserController {
 
     @RequestMapping("/get")
     public String getUser(String name, Model model) {
-        User user = userService.findByName(name);
+        User user = null;
+        try {
+            user = userCache.findUserByName(name);
+        } catch (Exception e) {
+            logger.error("get User by name:{} is error:", name, e);
+        }
         model.addAttribute("user", user);
         return "user/userList";
     }
