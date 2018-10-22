@@ -32,6 +32,13 @@ spring:
       max-idle: 8
       min-idle: 0
 
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      host: localhost
+      port: 27017
+      database: caixia
+
 
 ## Mybatis 配置
 mybatis:
