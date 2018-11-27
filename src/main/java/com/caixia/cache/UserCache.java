@@ -16,8 +16,6 @@ public class UserCache {
     @Autowired
     private UserMapper userMapper;
 
-
-
     @Cacheable(cacheNames = RedisCacheNames._USER, key = "#name")
     public User findUserByName(String name) throws Exception{
         User user = new User();

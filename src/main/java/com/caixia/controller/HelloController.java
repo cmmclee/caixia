@@ -5,6 +5,7 @@ import com.caixia.dao.mongo.UserMongoDao;
 import com.caixia.dao.redis.SpringJedisDao;
 import com.caixia.entity.mongo.UserMongoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,8 @@ public class HelloController {
     private UserMongoDao userMongoDao;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String sayHello() {
+    public String sayHello(HttpRequest request) {
+        System.out.println(request.toString());
         return "hello";
     }
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @auther: LiChaoChao
@@ -25,13 +26,13 @@ public class UserController {
     @Autowired
     private UserCache userCache;
 
-    @RequestMapping("/save")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveUser(User user) {
         userService.saveUser(user);
         return "saved "+ user.getName()+ "_" + user.getAge();
     }
 
-    @RequestMapping("/get")
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
     public String getUser(String name, Model model) {
         User user = null;
         try {
