@@ -1,6 +1,7 @@
 package com.caixia.controller;
 
 import com.caixia.config.CaiXiaConfig;
+import com.caixia.config.rabbit.HelloSender;
 import com.caixia.dao.mongo.UserMongoDao;
 import com.caixia.dao.redis.SpringJedisDao;
 import com.caixia.entity.mongo.UserMongoEntity;
@@ -23,6 +24,8 @@ public class HelloController {
     private SpringJedisDao springJedisDao;
     @Autowired
     private UserMongoDao userMongoDao;
+    @Autowired
+    private HelloSender helloSender;
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String sayHello(HttpRequest request) {
@@ -50,6 +53,11 @@ public class HelloController {
         return userMongoEntity.toString();
     }
 
-
+    @RequestMapping(value = "/mq", method = RequestMethod.GET)
+    public void helloMq() {
+        for (int i=0;i<100;i++) {
+            helloSender.send("hello " + i);
+        }
+    }
 
 }
