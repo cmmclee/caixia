@@ -13,43 +13,43 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserMongoDao extends BaseMongoDao<UserMongoEntity> {
-	
-	@Autowired
-	private UserMapper userMapper;
 
-	private static Logger logger = LoggerFactory.getLogger(UserMongoDao.class);
+    @Autowired
+    private UserMapper userMapper;
 
-	public void saveUserMongoEntity(UserMongoEntity user) {
-		try {
-			save(user);
-		} catch (Exception e) {
-			logger.error("saveUserMongoEntity is error", e);
-		}
-	}
+    private static Logger logger = LoggerFactory.getLogger(UserMongoDao.class);
 
-	public UserMongoEntity getUserMongoEntity(String name){
-		Query query = Query.query(Criteria.where("name").is(name));
-		try {
-			UserMongoEntity mongoUser = findOne(query);
-			if(null != mongoUser){
-				return mongoUser;
-			}else{
-				User user = userMapper.findByName(name);
-				return  saveUser2Mongo(user);
-			}
-		} catch (Exception e) {
-			logger.error("findOne is error",e);
-		}
-		return null;
-	}
+    public void saveUserMongoEntity(UserMongoEntity user) {
+        try {
+            save(user);
+        } catch (Exception e) {
+            logger.error("saveUserMongoEntity is error", e);
+        }
+    }
 
-	private UserMongoEntity saveUser2Mongo(User user){
-		UserMongoEntity userMongoEntity = new UserMongoEntity();
-		userMongoEntity.setName(user.getName());
-		userMongoEntity.setId(user.getId());
-		userMongoEntity.setAge(user.getAge());
-		saveUserMongoEntity(userMongoEntity);
-		return userMongoEntity;
-	}
+    public UserMongoEntity getUserMongoEntity(String name) {
+        Query query = Query.query(Criteria.where("name").is(name));
+        try {
+            UserMongoEntity mongoUser = findOne(query);
+            if (null != mongoUser) {
+                return mongoUser;
+            } else {
+                User user = userMapper.getUserByName(name);
+                return saveUser2Mongo(user);
+            }
+        } catch (Exception e) {
+            logger.error("findOne is error", e);
+        }
+        return null;
+    }
+
+    private UserMongoEntity saveUser2Mongo(User user) {
+        UserMongoEntity userMongoEntity = new UserMongoEntity();
+        userMongoEntity.setName(user.getName());
+        userMongoEntity.setId(user.getId());
+        userMongoEntity.setAge(user.getAge());
+        saveUserMongoEntity(userMongoEntity);
+        return userMongoEntity;
+    }
 
 }

@@ -1,6 +1,5 @@
 package com.caixia.controller;
 
-import com.caixia.cache.UserCache;
 import com.caixia.entity.User;
 import com.caixia.service.UserService;
 import org.slf4j.Logger;
@@ -23,20 +22,18 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserCache userCache;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveUser(User user) {
         userService.saveUser(user);
-        return "saved "+ user.getName()+ "_" + user.getAge();
+        return "saved " + user.getName() + "_" + user.getAge();
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public String getUser(String name, Model model) {
         User user = null;
         try {
-            user = userCache.findUserByName(name);
+            user = userService.getUserByName(name);
         } catch (Exception e) {
             logger.error("get User by name:{} is error:", name, e);
         }

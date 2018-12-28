@@ -1,8 +1,8 @@
 package com.caixia.cache;
 
 import com.caixia.constant.RedisCacheNames;
-import com.caixia.dao.UserMapper;
 import com.caixia.entity.User;
+import com.caixia.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +14,15 @@ public class UserCache {
 
     private static Logger logger = LoggerFactory.getLogger(UserCache.class);
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Cacheable(cacheNames = RedisCacheNames._USER, key = "#name")
-    public User findUserByName(String name) throws Exception{
+    public User getUserByName(String name) throws Exception{
         User user = new User();
         try {
-            user = userMapper.findByName(name);
+            user = userService.getUserByName(name);
         } catch (Exception e) {
-            logger.error("cache findUserByName is error:", e);
+            logger.error("cache getUserByName is error:", e);
         }
         return user;
     }

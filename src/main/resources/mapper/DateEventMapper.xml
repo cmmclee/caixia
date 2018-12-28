@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.caixia.dao.DateEventMapper" >
+  <resultMap id="BaseResultMap" type="com.caixia.entity.DateEvent" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="date_time" property="dateTime" jdbcType="VARCHAR" />
+    <result column="date_city" property="dateCity" jdbcType="VARCHAR" />
+    <result column="date_act" property="dateAct" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, date_time, date_city, date_act, create_time, update_time, score, remark
+  </sql>
+  <sql id="WHERE_CONDITION" >
+    <if test="dateTime != null" >
+      and date_time = #{dateTime,jdbcType=VARCHAR}
+    </if>
+    <if test="dateCity != null" >
+      and date_city = #{dateCity,jdbcType=VARCHAR}
+    </if>
+    <if test="dateAct != null" >
+      and date_act = #{dateAct,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null" >
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="score != null" >
+      and score = #{score,jdbcType=INTEGER}
+    </if>
+    <if test="remark != null" >
+      and remark = #{remark,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from date_event
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="listSelective" resultMap="BaseResultMap" parameterType="com.caixia.entity.DateEvent" >
+    select
+    <include refid="Base_Column_List" />
+    from date_event
+    where 1 = 1
+    <include refid="WHERE_CONDITION" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from date_event
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.caixia.entity.DateEvent" >
+    insert into date_event (id, date_time, date_city,
+      date_act, create_time, update_time,
+      score, remark)
+    values (#{id,jdbcType=BIGINT}, #{dateTime,jdbcType=VARCHAR}, #{dateCity,jdbcType=VARCHAR},
+      #{dateAct,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{score,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caixia.entity.DateEvent" >
+    insert into date_event
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dateTime != null" >
+        date_time,
+      </if>
+      <if test="dateCity != null" >
+        date_city,
+      </if>
+      <if test="dateAct != null" >
+        date_act,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dateTime != null" >
+        #{dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCity != null" >
+        #{dateCity,jdbcType=VARCHAR},
+      </if>
+      <if test="dateAct != null" >
+        #{dateAct,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caixia.entity.DateEvent" >
+    update date_event
+    <set >
+      <if test="dateTime != null" >
+        date_time = #{dateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCity != null" >
+        date_city = #{dateCity,jdbcType=VARCHAR},
+      </if>
+      <if test="dateAct != null" >
+        date_act = #{dateAct,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caixia.entity.DateEvent" >
+    update date_event
+    set date_time = #{dateTime,jdbcType=VARCHAR},
+      date_city = #{dateCity,jdbcType=VARCHAR},
+      date_act = #{dateAct,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -10,18 +10,18 @@
 	<parameterMap id="User" type="com.caixia.entity.User"/>
 
 	<sql id="Base_Column_List">
-		id, name, age
+		id, `name`, age
 	</sql>
 
-	<select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+	<select id="getUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select
 		<include refid="Base_Column_List" />
-		from user
-		where name = #{name}
+		from `user`
+		where `name` = #{name}
 	</select>
 
 	<insert id="saveUser" parameterMap="User">
-		INSERT INTO user(name,age)
+		INSERT INTO `user`(`name`,age)
 		VALUES (#{name},#{age})
 	</insert>
 

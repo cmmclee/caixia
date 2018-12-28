@@ -11,3 +11,7 @@
   > 过滤器Filter + 拦截器Interceptor
 * 2018.12.17
   > RabbitMQ
+* 2018.12.28
+  > TaskExecutorConfig 配置类 @Bean -- @Autowired
+  > @MapperScan("com.caixia.dao")
+  > Ali Java 代码规范

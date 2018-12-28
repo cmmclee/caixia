@@ -8,7 +8,7 @@ import com.caixia.entity.User;
  */
 public interface UserMapper {
 
-    User findByName(String name);
+    User getUserByName(String name);
 
     int saveUser(User user);
 }

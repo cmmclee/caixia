@@ -8,7 +8,7 @@ import com.caixia.entity.User;
  */
 public interface UserService {
 
-    User findByName(String name);
+    User getUserByName(String name);
 
     int saveUser(User user);
 }

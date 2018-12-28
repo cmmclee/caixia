@@ -33,13 +33,11 @@ public class HelloController {
         return "hello";
     }
 
-
     @RequestMapping(value = "/redis/set", method = RequestMethod.GET)
     public String redis() {
-        springJedisDao.set("li","18");
+        springJedisDao.set("li", "18");
         return "ok";
     }
-
 
     @RequestMapping(value = "/redis/get", method = RequestMethod.GET)
     public String redisGet() {
@@ -55,7 +53,7 @@ public class HelloController {
 
     @RequestMapping(value = "/mq", method = RequestMethod.GET)
     public void helloMq() {
-        for (int i=0;i<100;i++) {
+        for (int i = 0; i < 100; i++) {
             helloSender.send("hello " + i);
         }
     }
